@@ -2137,10 +2137,28 @@ public final class SdkClient {
         );
     }
 
+    // Literal path text a URI cannot carry (DigitalOcean's `/<upload_url>`) is
+    // percent-encoded; an encoded parameter stays as it is.
+    private static String encodePathText(String path) {
+        StringBuilder out = new StringBuilder();
+        for (byte raw : path.getBytes(java.nio.charset.StandardCharsets.UTF_8)) {
+            int c = raw & 0xff;
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9')
+                || "-._~!$&'()*+,;=:@/%?".indexOf(c) >= 0) {
+                out.append((char) c);
+            } else {
+                out.append('%')
+                    .append(Character.toUpperCase(Character.forDigit(c >> 4, 16)))
+                    .append(Character.toUpperCase(Character.forDigit(c & 0xF, 16)));
+            }
+        }
+        return out.toString();
+    }
+
     private static String buildUrl(String base, String path, Map<String, Object> query) {
         // Absolute URLs (used by url-style pagination follow links) bypass the base URL.
         boolean absolute = path.startsWith("http://") || path.startsWith("https://");
-        StringBuilder sb = new StringBuilder(absolute ? path : base + path);
+        StringBuilder sb = new StringBuilder(absolute ? path : base + encodePathText(path));
         if (query == null || query.isEmpty()) return sb.toString();
 
         boolean first = !sb.toString().contains("?");
