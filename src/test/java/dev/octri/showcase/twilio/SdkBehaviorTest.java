@@ -230,7 +230,12 @@ final class SdkBehaviorTest {
             assertEquals(expectation.get("method").asText(), sent.method, id + " method");
             String[] gotParts = sent.url.split("\\?", 2);
             String[] wantParts = expectation.get("url").asText().split("\\?", 2);
-            assertEquals(wantParts[0], gotParts[0], id + " url path");
+            // Literal path text a URI cannot carry (DigitalOcean's /<upload_url>)
+            // is sent percent-encoded.
+            assertEquals(
+                java.net.URLDecoder.decode(wantParts[0], java.nio.charset.StandardCharsets.UTF_8),
+                java.net.URLDecoder.decode(gotParts[0], java.nio.charset.StandardCharsets.UTF_8),
+                id + " url path");
             assertEquals(
                 normalizeQuery(wantParts.length > 1 ? wantParts[1] : null),
                 normalizeQuery(gotParts.length > 1 ? gotParts[1] : null),
