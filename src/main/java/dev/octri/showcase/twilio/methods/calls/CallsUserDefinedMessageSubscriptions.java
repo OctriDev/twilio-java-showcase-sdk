@@ -12,7 +12,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 public class CallsUserDefinedMessageSubscriptions {
 
-    public static class CreateCallsUserDefinedMessageSubscriptionsRequest {
+    public static class CreateCallUserDefinedMessageSubscriptionRequest {
 
         private String accountSid;
         private String callSid;
@@ -20,18 +20,18 @@ public class CallsUserDefinedMessageSubscriptions {
         private String idempotencyKey;
         private ApiV2010AccountApplicationSmsFallbackMethodEnum method;
 
-        private CreateCallsUserDefinedMessageSubscriptionsRequest() {}
+        private CreateCallUserDefinedMessageSubscriptionRequest() {}
 
         public static Builder builder() { return new Builder(); }
 
         public static class Builder {
-            private final CreateCallsUserDefinedMessageSubscriptionsRequest request = new CreateCallsUserDefinedMessageSubscriptionsRequest();
+            private final CreateCallUserDefinedMessageSubscriptionRequest request = new CreateCallUserDefinedMessageSubscriptionRequest();
             public Builder accountSid(String val) { request.accountSid = val; return this; }
             public Builder callSid(String val) { request.callSid = val; return this; }
             public Builder callback(String val) { request.callback = val; return this; }
             public Builder idempotencyKey(String val) { request.idempotencyKey = val; return this; }
             public Builder method(ApiV2010AccountApplicationSmsFallbackMethodEnum val) { request.method = val; return this; }
-            public CreateCallsUserDefinedMessageSubscriptionsRequest build() { return request; }
+            public CreateCallUserDefinedMessageSubscriptionRequest build() { return request; }
         }
         public String getAccountSid() { return accountSid; }
         public String getCallSid() { return callSid; }
@@ -43,14 +43,14 @@ public class CallsUserDefinedMessageSubscriptions {
     /**
      * Subscribe to User Defined Messages for a given Call SID.
      */
-    public static ApiV2010AccountCallUserDefinedMessageSubscription createCallsUserDefinedMessageSubscriptions(SdkConfig.ClientConfig clientConfig, CreateCallsUserDefinedMessageSubscriptionsRequest request) {
-        return createCallsUserDefinedMessageSubscriptions(clientConfig, request, null);
+    public static ApiV2010AccountCallUserDefinedMessageSubscription createCallUserDefinedMessageSubscription(SdkConfig.ClientConfig clientConfig, CreateCallUserDefinedMessageSubscriptionRequest request) {
+        return createCallUserDefinedMessageSubscription(clientConfig, request, null);
     }
 
     /**
      * Subscribe to User Defined Messages for a given Call SID.
      */
-    public static ApiV2010AccountCallUserDefinedMessageSubscription createCallsUserDefinedMessageSubscriptions(SdkConfig.ClientConfig clientConfig, CreateCallsUserDefinedMessageSubscriptionsRequest request, SdkConfig.RequestOptions options) {
+    public static ApiV2010AccountCallUserDefinedMessageSubscription createCallUserDefinedMessageSubscription(SdkConfig.ClientConfig clientConfig, CreateCallUserDefinedMessageSubscriptionRequest request, SdkConfig.RequestOptions options) {
         String accountSid = request.getAccountSid();
         String callSid = request.getCallSid();
         String callback = request.getCallback();
@@ -65,7 +65,7 @@ public class CallsUserDefinedMessageSubscriptions {
 
         Validation.validateUri("Callback", callback);
 
-        return SdkClient.request(clientConfig, "POST", "/2010-04-01/Accounts/" + SdkClient.encodePathSegment(accountSid) + "/Calls/" + SdkClient.encodePathSegment(callSid) + "/UserDefinedMessageSubscriptions.json", null, SdkClient.q("Callback", callback, "IdempotencyKey", SdkClient.omitIfNull(idempotencyKey), "Method", SdkClient.omitIfNull(method)), "application/x-www-form-urlencoded", new TypeReference<ApiV2010AccountCallUserDefinedMessageSubscription>(){}, "createCallsUserDefinedMessageSubscriptions", null, SdkClient.ResponseDecoder.JSON, options).data;
+        return SdkClient.request(clientConfig, "POST", "/2010-04-01/Accounts/" + SdkClient.encodePathSegment(accountSid) + "/Calls/" + SdkClient.encodePathSegment(callSid) + "/UserDefinedMessageSubscriptions.json", null, SdkClient.q("Callback", callback, "IdempotencyKey", SdkClient.omitIfNull(idempotencyKey), "Method", SdkClient.omitIfNull(method)), "application/x-www-form-urlencoded", new TypeReference<ApiV2010AccountCallUserDefinedMessageSubscription>(){}, "createCallUserDefinedMessageSubscription", null, SdkClient.ResponseDecoder.JSON, options).data;
     }
 
 
