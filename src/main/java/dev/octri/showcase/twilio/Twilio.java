@@ -998,15 +998,15 @@ public class Twilio {
         /**
          * Subscribe to User Defined Messages for a given Call SID.
          */
-        public ApiV2010AccountCallUserDefinedMessageSubscription create(CallsUserDefinedMessageSubscriptions.CreateCallsUserDefinedMessageSubscriptionsRequest request) {
-            return CallsUserDefinedMessageSubscriptions.createCallsUserDefinedMessageSubscriptions(this.clientConfig, request);
+        public ApiV2010AccountCallUserDefinedMessageSubscription create(CallsUserDefinedMessageSubscriptions.CreateCallUserDefinedMessageSubscriptionRequest request) {
+            return CallsUserDefinedMessageSubscriptions.createCallUserDefinedMessageSubscription(this.clientConfig, request);
         }
 
         /**
          * Subscribe to User Defined Messages for a given Call SID.
          */
-        public ApiV2010AccountCallUserDefinedMessageSubscription create(CallsUserDefinedMessageSubscriptions.CreateCallsUserDefinedMessageSubscriptionsRequest request, SdkConfig.RequestOptions options) {
-            return CallsUserDefinedMessageSubscriptions.createCallsUserDefinedMessageSubscriptions(this.clientConfig, request, options);
+        public ApiV2010AccountCallUserDefinedMessageSubscription create(CallsUserDefinedMessageSubscriptions.CreateCallUserDefinedMessageSubscriptionRequest request, SdkConfig.RequestOptions options) {
+            return CallsUserDefinedMessageSubscriptions.createCallUserDefinedMessageSubscription(this.clientConfig, request, options);
         }
 
         /**
